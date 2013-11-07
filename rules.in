@@ -1,0 +1,40 @@
+style
+if \( (\w+) \) { free \( \1 \) ; }
+Redundant condition. It is valid to free a NULL pointer.
+
+warning
+system \(
+ENV04-C. Do not call system() if you do not need a command processor
+
+//style define
+//(\+\+|\-\-)
+//Increment/decrement external variables inside define may have side effects. Prefer static inline functions.
+
+style define
+#define \w+ \( [^)]*(\b\w+\b) \) .*[^(,] \1 [^),]
+Better wrap variables in define into ()
+
+style define
+#define \w+ (?:const\s+)?(?:char|int|short|unsigned|unsigned int |float|double)(?: [*]+)?$
+PRE03-C. Prefer typedefs to defines for encoding types
+
+style raw
+<![CDATA[[?][?][=!('>/<-]]]>
+PRE07-C. Avoid using repeated question marks
+
+//style define
+//<![CDATA[#define \w+ \(.*?\) (?<!do).*{]]>
+//none
+
+style raw
+(?:char|int) \*+ \w+ , \w+ [^)]+;
+DCL04-C. Do not declare more than one variable per declaration
+
+style raw
+typedef [^;{}()]+ \* [^;{}()]* ;
+DCL05-C. Use typedefs of non-pointer types only
+
+style raw
+void \w+ \( \) {
+DCL20-C. Always specify void even if a function accepts no arguments
+

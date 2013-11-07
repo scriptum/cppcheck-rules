@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<rule>
+	<pattern>if \( (\w+) \) { free \( \1 \) ; }</pattern>
+	<message>
+		<severity>style</severity>
+		<summary>Redundant condition. It is valid to free a NULL pointer.</summary>
+	</message>
+</rule>

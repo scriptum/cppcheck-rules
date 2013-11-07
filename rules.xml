@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<rule>
+	<pattern>if \( (\w+) \) { free \( \1 \) ; }</pattern>
+	<message>
+		<severity>style</severity>
+		<summary>Redundant condition. It is valid to free a NULL pointer.</summary>
+	</message>
+</rule>
+<rule>
+	<pattern>system \(</pattern>
+	<message>
+		<severity>warning</severity>
+		<summary>ENV04-C. Do not call system() if you do not need a command processor</summary>
+	</message>
+</rule>
+<rule>
+	<tokenlist>define</tokenlist>
+	<pattern>#define \w+ \( [^)]*(\b\w+\b) \) .*[^(,] \1 [^),]</pattern>
+	<message>
+		<severity>style</severity>
+		<summary>Better wrap variables in define into ()</summary>
+	</message>
+</rule>
+<rule>
+	<tokenlist>define</tokenlist>
+	<pattern>#define \w+ (?:const\s+)?(?:char|int|short|unsigned|unsigned int |float|double)(?: [*]+)?$</pattern>
+	<message>
+		<severity>style</severity>
+		<summary>PRE03-C. Prefer typedefs to defines for encoding types</summary>
+	</message>
+</rule>
+<rule>
+	<tokenlist>raw</tokenlist>
+	<pattern><![CDATA[[?][?][=!('>/<-]]]></pattern>
+	<message>
+		<severity>style</severity>
+		<summary>PRE07-C. Avoid using repeated question marks</summary>
+	</message>
+</rule>
+<rule>
+	<tokenlist>raw</tokenlist>
+	<pattern>(?:char|int) \*+ \w+ , \w+ [^)]+;</pattern>
+	<message>
+		<severity>style</severity>
+		<summary>DCL04-C. Do not declare more than one variable per declaration</summary>
+	</message>
+</rule>
+<rule>
+	<tokenlist>raw</tokenlist>
+	<pattern>typedef [^;{}()]+ \* [^;{}()]* ;</pattern>
+	<message>
+		<severity>style</severity>
+		<summary>DCL05-C. Use typedefs of non-pointer types only</summary>
+	</message>
+</rule>
+<rule>
+	<tokenlist>raw</tokenlist>
+	<pattern>void \w+ \( \) {</pattern>
+	<message>
+		<severity>style</severity>
+		<summary>DCL20-C. Always specify void even if a function accepts no arguments</summary>
+	</message>
+</rule>
