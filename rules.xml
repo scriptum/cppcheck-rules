@@ -15,14 +15,6 @@
 </rule>
 <rule>
 	<tokenlist>define</tokenlist>
-	<pattern>#define \w+ \( [^)]*(\b\w+\b) \) .*[^(,] \1 [^),]</pattern>
-	<message>
-		<severity>style</severity>
-		<summary>Better wrap variables in define into ()</summary>
-	</message>
-</rule>
-<rule>
-	<tokenlist>define</tokenlist>
 	<pattern>#define \w+ (?:const\s+)?(?:char|int|short|unsigned|unsigned int |float|double)(?: [*]+)?$</pattern>
 	<message>
 		<severity>style</severity>
@@ -55,7 +47,7 @@
 </rule>
 <rule>
 	<tokenlist>raw</tokenlist>
-	<pattern>void \w+ \( \) {</pattern>
+	<pattern>\( \) {</pattern>
 	<message>
 		<severity>style</severity>
 		<summary>DCL20-C. Always specify void even if a function accepts no arguments</summary>

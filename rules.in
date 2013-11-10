@@ -10,9 +10,10 @@ ENV04-C. Do not call system() if you do not need a command processor
 //(\+\+|\-\-)
 //Increment/decrement external variables inside define may have side effects. Prefer static inline functions.
 
-style define
-#define \w+ \( [^)]*(\b\w+\b) \) .*[^(,] \1 [^),]
-Better wrap variables in define into ()
+// Too many false-positives
+//style define
+//#define \w+ \( [^)]*(\b\w+\b) \) .*[^(,] \1 [^),]
+//Better wrap variables in define into ()
 
 style define
 #define \w+ (?:const\s+)?(?:char|int|short|unsigned|unsigned int |float|double)(?: [*]+)?$
@@ -35,6 +36,6 @@ typedef [^;{}()]+ \* [^;{}()]* ;
 DCL05-C. Use typedefs of non-pointer types only
 
 style raw
-void \w+ \( \) {
+\( \) {
 DCL20-C. Always specify void even if a function accepts no arguments
 
