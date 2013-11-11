@@ -1,9 +1,9 @@
 style
-if \( (\w+) \) { free \( \1 \) ; }
+if \( (\b\w+\b) \) { (?:g_)?free \( \b\1\b \) ; }
 Redundant condition. It is valid to free a NULL pointer.
 
 warning
-system \(
+\bsystem \(
 ENV04-C. Do not call system() if you do not need a command processor
 
 //style define
@@ -38,4 +38,58 @@ DCL05-C. Use typedefs of non-pointer types only
 style raw
 \( \) {
 DCL20-C. Always specify void even if a function accepts no arguments
+
+style
+(?:(\b\w+\b) [+-] sizeof \( \b\1\b \)|sizeof \( (\b\w+\b) \) [+-] \b\1\b)
+EXP08-C. Ensure pointer arithmetic is used correctly
+
+warning raw
+sizeof \( [^)]*(?:\w+ [+-]{2}|[+-]{2} \w+)[^)]* \)
+EXP06-C. Operands to the sizeof operator should not contain side effects
+
+warning raw
+if [^{};]*(&&|\|\|)\W*(?:\b\w+\b [+-]{2}|[+-]{2} \b\w+\b)
+EXP02-A. The second operands of the logical AND and OR operators should not contain side effects
+
+warning raw
+memcmp [^{};]* sizeof \( struct \w+ \)
+EXP04-A. Do not perform byte-by-byte comparisons between structures
+
+warning raw
+<![CDATA[(?<![>.] )(\b\w+\b)[^{};()'"]*[\[+,*/=-][^{};()'"]*(?:\b\1\b [+-]{2}|[+-]{2} \b\1\b)]]>
+EXP30-C. Do not depend on order of evaluation between sequence points
+
+error normal
+strncpy \( (\w+) , \w+ , sizeof \( \1 \) \)
+The result of strncpy(a, b, sizeof(a)) will not be null-terminated
+
+style raw
+<![CDATA[(?<!const) (?:unsigned )?(?:char \* \w+|char \w+ \[ \]) = "]]>
+STR05-A. Prefer making string literals const-qualified
+
+error
+mktemp \( "[^"]+" \)
+The mktemp() function modifies its string argument
+
+error
+strcpy \( \w+ , getenv \( "[^"]+" \) \)
+Buffer overrun possible for long environment variables.
+
+error
+strncpy \( (\w+) , [^,]+, [^)]+ \) ;(?! \1 \[ [^\]]+ \] = 0 ;)
+STR32-C. Guarantee that the resulting null-terminated byte string is null-terminated
+
+error
+gets \( \w+ \)
+The gets() function is obsolescent, and is deprecated
+
+warning
+rewind \( \w+ \)
+There is no way of knowing if rewind() succeeded or not
+
+warning
+ato[l] \( \w+ \)
+There is no way of knowing if atoi/atol() succeeded or not
+
+
 
