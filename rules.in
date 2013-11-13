@@ -56,7 +56,7 @@ memcmp [^{};]* sizeof \( struct \w+ \)
 EXP04-A. Do not perform byte-by-byte comparisons between structures
 
 warning raw
-<![CDATA[(?<![>.] )(\b\w+\b)[^{};()'"]*[\[+,*/=-][^{};()'"]*(?:\b\1\b [+-]{2}|[+-]{2} \b\1\b)]]>
+<![CDATA[(?<![>.] )(\b\w+\b)[^{};()'"]*[\[+,*/=-][^{};()'"]*(?:\b\1\b [+-]{2} | [+-]{2} \b\1\b)]]>
 EXP30-C. Do not depend on order of evaluation between sequence points
 
 error normal
