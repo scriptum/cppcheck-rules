@@ -56,7 +56,7 @@ memcmp [^{};]* sizeof \( struct \w+ \)
 EXP04-A. Do not perform byte-by-byte comparisons between structures
 
 warning raw
-<![CDATA[(?<![>.] )(\b\w+\b)[^{};()'"]*[\[+,*/=-][^{};()'"]*(?:\b\1\b [+-]{2} | [+-]{2} \b\1\b)]]>
+<![CDATA[(?<![>.] )(\b\w+\b)[^{};()'"]*[\[+,*/=-][^{};()'"]*(?:\b\1\b [+-]{2}|[+-]{2} \b\1\b)]]>
 EXP30-C. Do not depend on order of evaluation between sequence points
 
 error normal
@@ -80,16 +80,41 @@ strncpy \( (\w+) , [^,]+, [^)]+ \) ;(?! \1 \[ [^\]]+ \] = 0 ;)
 STR32-C. Guarantee that the resulting null-terminated byte string is null-terminated
 
 error
-gets \( \w+ \)
+ gets \( \w+ \)
 The gets() function is obsolescent, and is deprecated
 
 warning
-rewind \( \w+ \)
+ rewind \( \w+ \)
 There is no way of knowing if rewind() succeeded or not
 
 warning
-ato[l] \( \w+ \)
-There is no way of knowing if atoi/atol() succeeded or not
+ (?:ato[lif] \( \w+ \)|atoll \( \w+ \))
+There is no way of knowing if ato*() succeeded or not
 
+warning
+(?: \+ = sn?printf| \+ sn?printf)
+The snprintf() funciton can return -1
 
+style
+ v?sprintf \( 
+Avoid using sprintf/vsprintf
 
+warning
+ f?open \( "/tmp/[^"]+" , 
+TMP30-C. Temporary files must created with unique and unpredictable file names
+
+warning
+ mktemp \(
+The mktemp() function was marked LEGACY in the Open Group Base Specifications Issue 6
+
+warning
+ signal \( [^,]+ , ([^,]+) \).* signal \( [^,]+ , \1 \)
+SIG00-A. Avoid using the same handler for multiple signals
+
+style
+ if \( \w+ == \w+ \) { ; } { }
+Maybe here should be == operator?
+
+style
+ if \( [^{}]+ \) { ; } { }
+The { } block is always executed because of the ";" following the if statement.
