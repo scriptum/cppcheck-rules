@@ -12,7 +12,7 @@ for line in sys.stdin:
 		next
 	ll = line.split() or [line]
 	l = ll[0].strip()
-	if l in ["style", "warning", "performance", "portability", "information"]:
+	if l in ["style", "warning", "performance", "portability", "information", "error"]:
 		severity = l
 		step = 0
 		tokenlist = None

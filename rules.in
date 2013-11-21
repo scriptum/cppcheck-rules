@@ -118,3 +118,8 @@ Maybe here should be == operator?
 style
  if \( [^{}]+ \) { ; } { }
 The { } block is always executed because of the ";" following the if statement.
+
+warning
+ vfork \( 
+Using the vfork function could result in a denial of service vulnerability
+
