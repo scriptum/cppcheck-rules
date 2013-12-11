@@ -186,17 +186,18 @@
 	</message>
 </rule>
 <rule>
-	<pattern> if \( \w+ == \w+ \) { ; } { }</pattern>
+	<tokenlist>raw</tokenlist>
+	<pattern> if \( \w+ = \w+ \) { </pattern>
 	<message>
-		<severity>style</severity>
+		<severity>warning</severity>
 		<summary>Maybe here should be == operator?</summary>
 	</message>
 </rule>
 <rule>
-	<pattern> if \( [^{}]+ \) { ; } { }</pattern>
+	<pattern> if \( [^{}]+ \) { ; } { </pattern>
 	<message>
-		<severity>style</severity>
-		<summary>The { } block is always executed because of the ";" following the if statement.</summary>
+		<severity>warning</severity>
+		<summary>The { } block is always executed because of the ";" following the if statement</summary>
 	</message>
 </rule>
 <rule>
@@ -204,5 +205,13 @@
 	<message>
 		<severity>warning</severity>
 		<summary>Using the vfork function could result in a denial of service vulnerability</summary>
+	</message>
+</rule>
+<rule>
+	<tokenlist>simple</tokenlist>
+	<pattern>= (?:g_)?getenv \( "[^"]+" \) ;[^()]+?(?:g_)?(?:get|set|unset|put)env</pattern>
+	<message>
+		<severity>warning</severity>
+		<summary>The string pointed to by the return value of getenv() can be  modified by a subsequent call to getenv, putenv, setenv, or unsetenv</summary>
 	</message>
 </rule>

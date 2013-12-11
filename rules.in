@@ -87,7 +87,7 @@ warning
  rewind \( \w+ \)
 There is no way of knowing if rewind() succeeded or not
 
-warning
+style
  (?:ato[lif] \( \w+ \)|atoll \( \w+ \))
 There is no way of knowing if ato*() succeeded or not
 
@@ -111,15 +111,18 @@ warning
  signal \( [^,]+ , ([^,]+) \).* signal \( [^,]+ , \1 \)
 SIG00-A. Avoid using the same handler for multiple signals
 
-style
- if \( \w+ == \w+ \) { ; } { }
+warning raw
+ if \( \w+ = \w+ \) { 
 Maybe here should be == operator?
 
-style
- if \( [^{}]+ \) { ; } { }
-The { } block is always executed because of the ";" following the if statement.
+warning
+ if \( [^{}]+ \) { ; } { 
+The { } block is always executed because of the ";" following the if statement
 
 warning
  vfork \( 
 Using the vfork function could result in a denial of service vulnerability
 
+warning simple
+= (?:g_)?getenv \( "[^"]+" \) ;[^()]+?(?:g_)?(?:get|set|unset|put)env
+The string pointed to by the return value of getenv() can be  modified by a subsequent call to getenv, putenv, setenv, or unsetenv

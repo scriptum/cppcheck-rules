@@ -6,3 +6,8 @@
 if (system("/bin/ls dir.`date +%Y%m%d`") == -1) {
   /* Handle error */
 }
+
+char *a = getenv("HOME");
+char *b = getenv("PATH");
+
+char *c = strdup(getenv("PATH"));
