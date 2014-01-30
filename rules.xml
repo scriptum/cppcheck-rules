@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <rule>
+	<tokenlist>simple</tokenlist>
 	<pattern><![CDATA[if \( (\b\w+\b) \) { (?:g_)?free \( \b\1\b \) ; }]]></pattern>
 	<message>
 		<severity>style</severity>

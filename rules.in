@@ -1,4 +1,4 @@
-style
+style simple
 if \( (\b\w+\b) \) { (?:g_)?free \( \b\1\b \) ; }
 Redundant condition. It is valid to free a NULL pointer.
 
