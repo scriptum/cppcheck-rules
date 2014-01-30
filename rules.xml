@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <rule>
-	<pattern>if \( (\b\w+\b) \) { (?:g_)?free \( \b\1\b \) ; }</pattern>
+	<pattern><![CDATA[if \( (\b\w+\b) \) { (?:g_)?free \( \b\1\b \) ; }]]></pattern>
 	<message>
 		<severity>style</severity>
 		<summary>Redundant condition. It is valid to free a NULL pointer.</summary>
 	</message>
 </rule>
 <rule>
-	<pattern>\bsystem \(</pattern>
+	<pattern><![CDATA[\bsystem \(]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>ENV04-C. Do not call system() if you do not need a command processor</summary>
@@ -15,7 +15,7 @@
 </rule>
 <rule>
 	<tokenlist>define</tokenlist>
-	<pattern>#define \w+ (?:const\s+)?(?:char|int|short|unsigned|unsigned int |float|double)(?: [*]+)?$</pattern>
+	<pattern><![CDATA[#define \w+ (?:const\s+)?(?:char|int|short|unsigned|unsigned int |float|double)(?: [*]+)?$]]></pattern>
 	<message>
 		<severity>style</severity>
 		<summary>PRE03-C. Prefer typedefs to defines for encoding types</summary>
@@ -31,7 +31,7 @@
 </rule>
 <rule>
 	<tokenlist>raw</tokenlist>
-	<pattern>(?:char|int) \*+ \w+ , \w+ [^)]+;</pattern>
+	<pattern><![CDATA[(?:char|int) \*+ \w+ , \w+ [^)]+;]]></pattern>
 	<message>
 		<severity>style</severity>
 		<summary>DCL04-C. Do not declare more than one variable per declaration</summary>
@@ -39,7 +39,7 @@
 </rule>
 <rule>
 	<tokenlist>raw</tokenlist>
-	<pattern>typedef [^;{}()]+ \* [^;{}()]* ;</pattern>
+	<pattern><![CDATA[typedef [^;{}()]+ \* [^;{}()]* ;]]></pattern>
 	<message>
 		<severity>style</severity>
 		<summary>DCL05-C. Use typedefs of non-pointer types only</summary>
@@ -47,14 +47,14 @@
 </rule>
 <rule>
 	<tokenlist>raw</tokenlist>
-	<pattern>\( \) {</pattern>
+	<pattern><![CDATA[\( \) {]]></pattern>
 	<message>
 		<severity>style</severity>
 		<summary>DCL20-C. Always specify void even if a function accepts no arguments</summary>
 	</message>
 </rule>
 <rule>
-	<pattern>(?:(\b\w+\b) [+-] sizeof \( \b\1\b \)|sizeof \( (\b\w+\b) \) [+-] \b\1\b)</pattern>
+	<pattern><![CDATA[(?:(\b\w+\b) [+-] sizeof \( \b\1\b \)|sizeof \( (\b\w+\b) \) [+-] \b\1\b)]]></pattern>
 	<message>
 		<severity>style</severity>
 		<summary>EXP08-C. Ensure pointer arithmetic is used correctly</summary>
@@ -62,7 +62,7 @@
 </rule>
 <rule>
 	<tokenlist>raw</tokenlist>
-	<pattern>sizeof \( [^)]*(?:\w+ [+-]{2}|[+-]{2} \w+)[^)]* \)</pattern>
+	<pattern><![CDATA[sizeof \( [^)]*(?:\w+ [+-]{2}|[+-]{2} \w+)[^)]* \)]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>EXP06-C. Operands to the sizeof operator should not contain side effects</summary>
@@ -70,7 +70,7 @@
 </rule>
 <rule>
 	<tokenlist>raw</tokenlist>
-	<pattern>if [^{};]*(&&|\|\|)\W*(?:\b\w+\b [+-]{2}|[+-]{2} \b\w+\b)</pattern>
+	<pattern><![CDATA[if [^{};]*(&&|\|\|)\W*(?:\b\w+\b [+-]{2}|[+-]{2} \b\w+\b)]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>EXP02-A. The second operands of the logical AND and OR operators should not contain side effects</summary>
@@ -78,7 +78,7 @@
 </rule>
 <rule>
 	<tokenlist>raw</tokenlist>
-	<pattern>memcmp [^{};]* sizeof \( struct \w+ \)</pattern>
+	<pattern><![CDATA[memcmp [^{};]* sizeof \( struct \w+ \)]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>EXP04-A. Do not perform byte-by-byte comparisons between structures</summary>
@@ -94,7 +94,7 @@
 </rule>
 <rule>
 	<tokenlist>normal</tokenlist>
-	<pattern>strncpy \( (\w+) , \w+ , sizeof \( \1 \) \)</pattern>
+	<pattern><![CDATA[strncpy \( (\w+) , \w+ , sizeof \( \1 \) \)]]></pattern>
 	<message>
 		<severity>error</severity>
 		<summary>The result of strncpy(a, b, sizeof(a)) will not be null-terminated</summary>
@@ -109,77 +109,70 @@
 	</message>
 </rule>
 <rule>
-	<pattern>mktemp \( "[^"]+" \)</pattern>
+	<pattern><![CDATA[mktemp \( "[^"]+" \)]]></pattern>
 	<message>
 		<severity>error</severity>
 		<summary>The mktemp() function modifies its string argument</summary>
 	</message>
 </rule>
 <rule>
-	<pattern>strcpy \( \w+ , getenv \( "[^"]+" \) \)</pattern>
+	<pattern><![CDATA[strcpy \( \w+ , getenv \( "[^"]+" \) \)]]></pattern>
 	<message>
 		<severity>error</severity>
 		<summary>Buffer overrun possible for long environment variables.</summary>
 	</message>
 </rule>
 <rule>
-	<pattern>strncpy \( (\w+) , [^,]+, [^)]+ \) ;(?! \1 \[ [^\]]+ \] = 0 ;)</pattern>
-	<message>
-		<severity>error</severity>
-		<summary>STR32-C. Guarantee that the resulting null-terminated byte string is null-terminated</summary>
-	</message>
-</rule>
-<rule>
-	<pattern> gets \( \w+ \)</pattern>
+	<pattern><![CDATA[ gets \( ]]></pattern>
 	<message>
 		<severity>error</severity>
 		<summary>The gets() function is obsolescent, and is deprecated</summary>
 	</message>
 </rule>
 <rule>
-	<pattern> rewind \( \w+ \)</pattern>
+	<pattern><![CDATA[ rewind \( ]]></pattern>
 	<message>
 		<severity>warning</severity>
-		<summary>There is no way of knowing if rewind() succeeded or not</summary>
+		<summary>rewind() cannot report about errors, use fseek</summary>
 	</message>
 </rule>
 <rule>
-	<pattern> (?:ato[lif] \( \w+ \)|atoll \( \w+ \))</pattern>
+	<pattern><![CDATA[ (?:ato[lif] \( |atoll \( )]]></pattern>
 	<message>
-		<severity>warning</severity>
-		<summary>There is no way of knowing if ato*() succeeded or not</summary>
+		<severity>style</severity>
+		<summary>ato*() cannot report about errors, use strtol</summary>
 	</message>
 </rule>
 <rule>
-	<pattern>(?: \+ = sn?printf| \+ sn?printf)</pattern>
+	<pattern><![CDATA[(?: \+ = sn?printf| \+ sn?printf)]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>The snprintf() funciton can return -1</summary>
 	</message>
 </rule>
 <rule>
-	<pattern> v?sprintf \( </pattern>
+	<pattern><![CDATA[ v?sprintf \( ]]></pattern>
 	<message>
 		<severity>style</severity>
 		<summary>Avoid using sprintf/vsprintf</summary>
 	</message>
 </rule>
 <rule>
-	<pattern> f?open \( "/tmp/[^"]+" , </pattern>
+	<pattern><![CDATA[ f?open \( "/tmp/[^"]+" , ]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>TMP30-C. Temporary files must created with unique and unpredictable file names</summary>
 	</message>
 </rule>
 <rule>
-	<pattern> mktemp \(</pattern>
+	<pattern><![CDATA[ mktemp \(]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>The mktemp() function was marked LEGACY in the Open Group Base Specifications Issue 6</summary>
 	</message>
 </rule>
 <rule>
-	<pattern> signal \( [^,]+ , ([^,]+) \).* signal \( [^,]+ , \1 \)</pattern>
+	<pattern><![CDATA[ signal \( [^,]+ , ([^,]+) \).* signal \( [^,]+ , \1 \)]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>SIG00-A. Avoid using the same handler for multiple signals</summary>
@@ -187,21 +180,21 @@
 </rule>
 <rule>
 	<tokenlist>raw</tokenlist>
-	<pattern> if \( \w+ = \w+ \) { </pattern>
+	<pattern><![CDATA[ if \( \w+ = \w+ \) { ]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>Maybe here should be == operator?</summary>
 	</message>
 </rule>
 <rule>
-	<pattern> if \( [^{}]+ \) { ; } { </pattern>
+	<pattern><![CDATA[ if \( [^{}]+ \) { ; } { ]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>The { } block is always executed because of the ";" following the if statement</summary>
 	</message>
 </rule>
 <rule>
-	<pattern> vfork \( </pattern>
+	<pattern><![CDATA[ vfork \( ]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>Using the vfork function could result in a denial of service vulnerability</summary>
@@ -209,7 +202,7 @@
 </rule>
 <rule>
 	<tokenlist>simple</tokenlist>
-	<pattern>= (?:g_)?getenv \( "[^"]+" \) ;[^()]+?(?:g_)?(?:get|set|unset|put)env</pattern>
+	<pattern><![CDATA[= (?:g_)?getenv \( "[^"]+" \) ;[^()]+?(?:g_)?(?:get|set|unset|put)env]]></pattern>
 	<message>
 		<severity>warning</severity>
 		<summary>The string pointed to by the return value of getenv() can be  modified by a subsequent call to getenv, putenv, setenv, or unsetenv</summary>

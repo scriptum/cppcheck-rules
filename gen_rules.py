@@ -25,7 +25,7 @@ for line in sys.stdin:
 			print "<rule>"
 			if tokenlist:
 				print "\t<tokenlist>%s</tokenlist>" % tokenlist
-			print "\t<pattern>%s</pattern>" % pattern
+			print "\t<pattern><![CDATA[%s]]></pattern>" % pattern
 			print "\t<message>"
 			print "\t\t<severity>%s</severity>" % severity
 			if summary == "none":

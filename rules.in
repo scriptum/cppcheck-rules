@@ -20,11 +20,11 @@ style define
 PRE03-C. Prefer typedefs to defines for encoding types
 
 style raw
-<![CDATA[[?][?][=!('>/<-]]]>
+[?][?][=!('>/<-]
 PRE07-C. Avoid using repeated question marks
 
 //style define
-//<![CDATA[#define \w+ \(.*?\) (?<!do).*{]]>
+//#define \w+ \(.*?\) (?<!do).*{
 //none
 
 style raw
@@ -56,7 +56,7 @@ memcmp [^{};]* sizeof \( struct \w+ \)
 EXP04-A. Do not perform byte-by-byte comparisons between structures
 
 warning raw
-<![CDATA[(?<![>.] )(\b\w+\b)[^{};()'"]*[\[+,*/=-][^{};()'"]*(?:\b\1\b [+-]{2}|[+-]{2} \b\1\b)]]>
+(?<![>.] )(\b\w+\b)[^{};()'"]*[\[+,*/=-][^{};()'"]*(?:\b\1\b [+-]{2}|[+-]{2} \b\1\b)
 EXP30-C. Do not depend on order of evaluation between sequence points
 
 error normal
@@ -64,7 +64,7 @@ strncpy \( (\w+) , \w+ , sizeof \( \1 \) \)
 The result of strncpy(a, b, sizeof(a)) will not be null-terminated
 
 style raw
-<![CDATA[(?<!const) (?:unsigned )?(?:char \* \w+|char \w+ \[ \]) = "]]>
+(?<!const) (?:unsigned )?(?:char \* \w+|char \w+ \[ \]) = "
 STR05-A. Prefer making string literals const-qualified
 
 error
@@ -76,20 +76,16 @@ strcpy \( \w+ , getenv \( "[^"]+" \) \)
 Buffer overrun possible for long environment variables.
 
 error
-strncpy \( (\w+) , [^,]+, [^)]+ \) ;(?! \1 \[ [^\]]+ \] = 0 ;)
-STR32-C. Guarantee that the resulting null-terminated byte string is null-terminated
-
-error
- gets \( \w+ \)
+ gets \( 
 The gets() function is obsolescent, and is deprecated
 
 warning
- rewind \( \w+ \)
-There is no way of knowing if rewind() succeeded or not
+ rewind \( 
+rewind() cannot report about errors, use fseek
 
 style
- (?:ato[lif] \( \w+ \)|atoll \( \w+ \))
-There is no way of knowing if ato*() succeeded or not
+ (?:ato[lif] \( |atoll \( )
+ato*() cannot report about errors, use strtol
 
 warning
 (?: \+ = sn?printf| \+ sn?printf)
