@@ -1,0 +1,3 @@
+style raw
+\( \) {
+DCL20-C. Always specify void even if a function accepts no arguments

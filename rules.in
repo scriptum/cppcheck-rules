@@ -35,10 +35,6 @@ style raw
 typedef [^;{}()]+ \* [^;{}()]* ;
 DCL05-C. Use typedefs of non-pointer types only
 
-style raw
-\( \) {
-DCL20-C. Always specify void even if a function accepts no arguments
-
 style
 (?:(\b\w+\b) [+-] sizeof \( \b\1\b \)|sizeof \( (\b\w+\b) \) [+-] \b\1\b)
 EXP08-C. Ensure pointer arithmetic is used correctly
